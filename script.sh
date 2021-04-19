@@ -63,6 +63,9 @@ tfsec --format=checkstyle ${INPUT_FLAGS} . \
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[1]}" exit_code=$?
 
+echo "TFSEC: ${tfsec_return}"
+echo "REVIEWDOG: ${reviewdog_return}"
+
 echo ::set-output name=tfsec-return-code::"${tfsec_return}"
 echo ::set-output name=reviewdog-return-code::"${reviewdog_return}"
 echo '::endgroup::'

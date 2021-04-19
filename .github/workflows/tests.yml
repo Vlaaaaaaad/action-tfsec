@@ -116,7 +116,7 @@ jobs:
           fi
 
           if [[ "$reviewdog_return" -eq 0 ]]; then
-            echo "reviewdog correctly returned failure: ${reviewdog_return}"
+            echo "reviewdog correctly returned success: ${reviewdog_return}"
           else
             echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
             exit 1
