@@ -31,17 +31,19 @@ if [[ "$os" = "windows" ]]; then
     url+=".exe"
     curl -sfL "$url" --output tfsec.exe
 
-    TFSEC_BINARY_PATH="$HOME\.bin\tfsec.exe"
-    mv tfsec.exe "$TFSEC_BINARY_PATH"
+    TFSEC_PATH="$HOME\.bin\tfsec"
+    mkdir -p "$TFSEC_PATH"
+    mv tfsec.exe "$TFSEC_PATH\tfsec.exe"
 
-    echo "$TFSEC_BINARY_PATH" >> "$GITHUB_PATH"
+    echo "$TFSEC_PATH" >> "$GITHUB_PATH"
 else
     curl -sfL "$url" --output tfsec
     chmod +x tfsec
     
-    TFSEC_BINARY_PATH="$HOME/.bin/tfsec"
-    mv tfsec "$TFSEC_BINARY_PATH"
-    echo "$TFSEC_BINARY_PATH" >> "$GITHUB_PATH"
+    TFSEC_PATH="$HOME/.bin/tfsec"
+    mkdir -p "$TFSEC_PATH"
+    mv tfsec "$TFSEC_PATH/tfsec"
+    echo "$TFSEC_PATH" >> "$GITHUB_PATH"
 fi
 echo '::endgroup::'
 
