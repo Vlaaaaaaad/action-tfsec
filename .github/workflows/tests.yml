@@ -30,14 +30,14 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
-          if [ "$tfsec_return" -eq 1 ]; then
+          if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
             echo "tfsec returned ${tfsec_return}, expected '1'. Failing..."
             exit 1
           fi
 
-          if [ "$reviewdog_return" -eq 0 ]; then
+          if [[ "$reviewdog_return" -eq 0 ]]; then
             echo "reviewdog correctly returned success: ${reviewdog_return}"
           else
             echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
@@ -68,17 +68,17 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
-          if [ "$tfsec_return" -eq 1 ]; then
+          if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
             echo "tfsec returned ${tfsec_return}, expected '1'. Failing..."
             exit 1
           fi
 
-          if [ "$reviewdog_return" -eq 0 ]; then
+          if [[ "$reviewdog_return" -eq 0 ]]; then
             echo "reviewdog correctly returned success: ${reviewdog_return}"
           else
-            echo "reviewdog returned ${reviewdog_return}, expected '1'. Failing..."
+            echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
             exit 1
           fi
 
@@ -108,14 +108,14 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
-          if [ "$tfsec_return" -eq 1 ]; then
+          if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
             echo "tfsec returned ${tfsec_return}, expected '1'. Failing..."
             exit 1
           fi
 
-          if [ "$reviewdog_return" -eq 0 ]; then
+          if [[ "$reviewdog_return" -eq 0 ]]; then
             echo "reviewdog correctly returned failure: ${reviewdog_return}"
           else
             echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
@@ -145,14 +145,14 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
-          if [ "$tfsec_return" -eq 1 ]; then
+          if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
             echo "tfsec returned ${tfsec_return}, expected '1'. Failing..."
             exit 1
           fi
 
-          if [ "$reviewdog_return" -eq 0 ]; then
+          if [[ "$reviewdog_return" -eq 0 ]]; then
             echo "reviewdog correctly returned success: ${reviewdog_return}"
           else
             echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
@@ -182,14 +182,14 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
-          if [ "$tfsec_return" -eq 1 ]; then
+          if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
             echo "tfsec returned ${tfsec_return}, expected '1'. Failing..."
             exit 1
           fi
 
-          if [ "$reviewdog_return" -eq 0 ]; then
+          if [[ "$reviewdog_return" -eq 0 ]]; then
             echo "reviewdog correctly returned success: ${reviewdog_return}"
           else
             echo "reviewdog returned ${reviewdog_return}, expected '0'. Failing..."
