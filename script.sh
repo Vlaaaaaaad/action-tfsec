@@ -28,7 +28,7 @@ echo "Detected ${os} running on ${arch}"
 mkdir -p ./bin
 
 url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
-if [ "$OS" = "windows" ]; then
+if [[ "$os" = "windows" ]]; then
     url+=".exe"
     curl -sfL "$url" --output tfsec.exe
     mv tfsec ./bin/tfsec.exe
@@ -41,6 +41,9 @@ else
 fi
 echo '::endgroup::'
 
+echo "::group:: Print tfsec version details"
+tfsec --version
+echo '::endgroup::'
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
