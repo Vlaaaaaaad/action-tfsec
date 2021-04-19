@@ -36,6 +36,7 @@ if [[ "$os" = "windows" ]]; then
     mv tfsec.exe "$TFSEC_PATH\tfsec.exe"
 
     echo "$TFSEC_PATH" >> "$GITHUB_PATH"
+    export PATH="$TFSEC_PATH:$PATH"
 else
     curl -sfL "$url" --output tfsec
     chmod +x tfsec
@@ -43,7 +44,9 @@ else
     TFSEC_PATH="$HOME/.bin/tfsec"
     mkdir -p "$TFSEC_PATH"
     mv tfsec "$TFSEC_PATH/tfsec"
+    
     echo "$TFSEC_PATH" >> "$GITHUB_PATH"
+    export PATH="$TFSEC_PATH:$PATH"
 fi
 echo '::endgroup::'
 
