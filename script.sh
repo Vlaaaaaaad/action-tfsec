@@ -30,15 +30,18 @@ url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
 if [[ "$os" = "windows" ]]; then
     url+=".exe"
     curl -sfL "$url" --output tfsec.exe
-    mv tfsec.exe /bin/tfsec.exe
-    echo "\bin" >> "$GITHUB_PATH"
-    export PATH="\bin:"$PATH
+
+    TFSEC_BINARY_PATH="$HOME\.bin\tfsec.exe"
+    mv tfsec.exe "$TFSEC_BINARY_PATH"
+
+    echo "$TFSEC_BINARY_PATH" >> "$GITHUB_PATH"
 else
     curl -sfL "$url" --output tfsec
     chmod +x tfsec
-    mv tfsec /bin/tfsec
-    echo "/bin" >> "$GITHUB_PATH"
-    export PATH="/bin:"$PATH
+    
+    TFSEC_BINARY_PATH="$HOME/.bin/tfsec"
+    mv tfsec "$TFSEC_BINARY_PATH"
+    echo "$TFSEC_BINARY_PATH" >> "$GITHUB_PATH"
 fi
 echo '::endgroup::'
 
