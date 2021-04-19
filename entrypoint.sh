@@ -6,10 +6,13 @@ fi
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
-tfsec --format=checkstyle ${INPUT_FLAGS} "${INPUT_WORKING_DIRECTORY}" \
-  | reviewdog -f=checkstyle -name="tfsec" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -fail-on-error="${INPUT_FAIL_ON_ERROR}" -filter-mode="${INPUT_FILTER_MODE}" -tee
+tfsec --format=checkstyle --no-color . \
+  | reviewdog -f=checkstyle -name="tfsec" -reporter=github-pr-review -fail-on-error=false -filter-mode=nofilter -tee
 
 tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[1]}" exit_code=$?
+
+echo "${tfsec_return}"
+echo "${reviewdog_return}"
 
 echo ::set-output name=tfsec-return-code::"${tfsec_return}"
 echo ::set-output name=reviewdog-return-code::"${reviewdog_return}"
