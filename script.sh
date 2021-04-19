@@ -25,19 +25,20 @@ case "${unameArch}" in
     *)         echo "Unsupported architecture: ${unameArch}. Only AMD64 is supported by tfsec" && exit 1
 esac
 echo "Detected ${os} running on ${arch}"
-mkdir -p ./bin
 
 url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
 if [[ "$os" = "windows" ]]; then
     url+=".exe"
     curl -sfL "$url" --output tfsec.exe
-    mv tfsec ./bin/tfsec.exe
-    echo "$(pwd)\bin" >> "$GITHUB_PATH"
+    mv tfsec.exe /bin/tfsec.exe
+    echo "\bin" >> "$GITHUB_PATH"
+    export PATH="\bin:"$PATH
 else
     curl -sfL "$url" --output tfsec
     chmod +x tfsec
-    mv tfsec ./bin/tfsec
-    echo "$(pwd)/bin" >> "$GITHUB_PATH"
+    mv tfsec /bin/tfsec
+    echo "/bin" >> "$GITHUB_PATH"
+    export PATH="/bin:"$PATH
 fi
 echo '::endgroup::'
 
