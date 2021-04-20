@@ -30,7 +30,7 @@ echo '::group:: Installing tfsec ... https://github.com/tfsec/tfsec'
 
     TFSEC_PATH="$HOME/.bin/tfsec"
     echo "Detected ${os} running on ${arch}, will install tfsec at ${TFSEC_PATH}"
-    test ! -d "${TFSEC_PATH}" && install --directory "${TFSEC_PATH}"
+    test ! -d "${TFSEC_PATH}" && install -d "${TFSEC_PATH}"
 
     binary="tfsec"
     url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
