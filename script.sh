@@ -24,6 +24,7 @@ echo '::group:: Installing tfsec ... https://github.com/tfsec/tfsec'
 
     unameArch="$(uname -m)"
     case "${unameArch}" in
+        x86*)      arch=amd64;;
         *)         echo "Unsupported architecture: ${unameArch}. Only AMD64 is supported by tfsec" && exit 1
     esac
 
