@@ -60,6 +60,11 @@ The default is `false`.
 
 See [reviewdog doccumentation for exit codes](https://github.com/reviewdog/reviewdog/tree/master#exit-codes) for details.
 
+### `reviewdog_flags`
+
+Optional. Additional reviewdog flags. Useful for debugging errors, when it can be set to `-tee`.
+The default is ``.
+
 ### `working_directory`
 
 Optional. Directory to run the action on, from the repo root.

@@ -71,7 +71,8 @@ echo '::group:: Running tfsec with reviewdog 🐶 ...'
         -reporter="${INPUT_REPORTER}" \
         -level="${INPUT_LEVEL}" \
         -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
-        -filter-mode="${INPUT_FILTER_MODE}"
+        -filter-mode="${INPUT_FILTER_MODE}" \
+        ${INPUT_REVIEWDOG_FLAGS}
 
   tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[1]}" exit_code=$?
   echo "::set-output name=tfsec-return-code::${tfsec_return}"
