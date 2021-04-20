@@ -4,7 +4,6 @@ cd "${GITHUB_WORKSPACE}/${INPUT_WORKING_DIRECTORY}" || exit
 
 echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/reviewdog'
 REVIEWDOG_PATH="$HOME/.bin/reviewdog"
-mkdir -p "$REVIEWDOG_PATH"
 
 curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${REVIEWDOG_PATH}" "${REVIEWDOG_VERSION}" 2>&1
 
@@ -29,22 +28,16 @@ case "${unameArch}" in
 esac
 echo "Detected ${os} running on ${arch}"
 
+TFSEC_PATH="$HOME/.bin/tfsec"
 url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
 if [[ "$os" = "windows" ]]; then
     url+=".exe"
     curl -sfL "$url" --output tfsec.exe
-
-    TFSEC_PATH="$HOME\.bin\tfsec"
-    mkdir -p "$TFSEC_PATH"
-    mv tfsec.exe "$TFSEC_PATH\tfsec.exe"
+    install tfsec.exe "$TFSEC_PATH"
 else
     curl -sfL "$url" --output tfsec
-    chmod +x tfsec
-    
-    TFSEC_PATH="$HOME/.bin/tfsec"
-    mkdir -p "$TFSEC_PATH"
-    mv tfsec "$TFSEC_PATH/tfsec"
-    fi
+    install tfsec "$TFSEC_PATH"
+fi
 
 echo "$TFSEC_PATH" >> "$GITHUB_PATH"
 export PATH="$TFSEC_PATH:$PATH"
