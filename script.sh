@@ -2,11 +2,14 @@
 
 cd "${GITHUB_WORKSPACE}/${INPUT_WORKING_DIRECTORY}" || exit
 
-TEMP_PATH="$(mktemp -d)"
-PATH="${TEMP_PATH}:$PATH"
-
 echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/reviewdog'
-curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${TEMP_PATH}" "${REVIEWDOG_VERSION}" 2>&1
+REVIEWDOG_PATH="$HOME\.bin\reviewdog"
+mkdir -p "$REVIEWDOG_PATH"
+
+curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${REVIEWDOG_PATH}" "${REVIEWDOG_VERSION}" 2>&1
+
+echo "$REVIEWDOG_PATH" >> "$GITHUB_PATH"
+export PATH="$REVIEWDOG_PATH:$PATH"
 echo '::endgroup::'
 
 echo '::group:: Installing tfsec ... https://github.com/tfsec/tfsec'
@@ -34,9 +37,6 @@ if [[ "$os" = "windows" ]]; then
     TFSEC_PATH="$HOME\.bin\tfsec"
     mkdir -p "$TFSEC_PATH"
     mv tfsec.exe "$TFSEC_PATH\tfsec.exe"
-
-    echo "$TFSEC_PATH" >> "$GITHUB_PATH"
-    export PATH="$TFSEC_PATH:$PATH"
 else
     curl -sfL "$url" --output tfsec
     chmod +x tfsec
@@ -44,10 +44,10 @@ else
     TFSEC_PATH="$HOME/.bin/tfsec"
     mkdir -p "$TFSEC_PATH"
     mv tfsec "$TFSEC_PATH/tfsec"
-    
-    echo "$TFSEC_PATH" >> "$GITHUB_PATH"
-    export PATH="$TFSEC_PATH:$PATH"
-fi
+    fi
+
+echo "$TFSEC_PATH" >> "$GITHUB_PATH"
+export PATH="$TFSEC_PATH:$PATH"
 echo '::endgroup::'
 
 echo "::group:: Print tfsec version details"
