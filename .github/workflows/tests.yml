@@ -34,6 +34,9 @@ jobs:
           tfsec_return="${{ steps.test.outputs.tfsec-return-code }}"
           reviewdog_return="${{ steps.test.outputs.reviewdog-return-code }}"
 
+          echo "$tfsec_return"
+          echo "$reviewdog_return"
+
           if [[ "$tfsec_return" -eq 1 ]]; then
             echo "tfsec correctly returned failure ${tfsec_return}"
           else
