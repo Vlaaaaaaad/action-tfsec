@@ -26,7 +26,6 @@ resource "aws_security_group_rule" "example_rule" {
 }
 
 
-
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "West Europe"
