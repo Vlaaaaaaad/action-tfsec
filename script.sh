@@ -56,7 +56,7 @@ echo '::group:: Running tfsec with reviewdog 🐶 ...'
     export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
     # shellcheck disable=SC2086
     tfsec --format=checkstyle ${INPUT_FLAGS} . \
-    | reviewdog -f=checkstyle -name="tfsec" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -fail-on-error="${INPUT_FAIL_ON_ERROR}" -filter-mode="${INPUT_FILTER_MODE}"
+        | reviewdog -f=checkstyle -name="tfsec" -reporter="${INPUT_REPORTER}" -level="${INPUT_LEVEL}" -fail-on-error="${INPUT_FAIL_ON_ERROR}" -filter-mode="${INPUT_FILTER_MODE}"
 
     tfsec_return="${PIPESTATUS[0]}" reviewdog_return="${PIPESTATUS[1]}" exit_code=$?
 
