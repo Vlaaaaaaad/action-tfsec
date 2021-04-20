@@ -2,8 +2,10 @@
 
 cd "${GITHUB_WORKSPACE}/${INPUT_WORKING_DIRECTORY}" || exit
 
+TEMP_PATH="$(mktemp -d)"
+
 echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/reviewdog'
-    REVIEWDOG_PATH="$HOME/.bin/reviewdog"
+    REVIEWDOG_PATH="$TEMP_PATH/reviewdog"
 
     curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${REVIEWDOG_PATH}" "${REVIEWDOG_VERSION}" 2>&1
 
@@ -28,7 +30,7 @@ echo '::group:: Installing tfsec ... https://github.com/tfsec/tfsec'
         *)         echo "Unsupported architecture: ${unameArch}. Only AMD64 is supported by tfsec" && exit 1
     esac
 
-    TFSEC_PATH="$HOME/.bin/tfsec"
+    TFSEC_PATH="$TEMP_PATH/tfsec"
     echo "Detected ${os} running on ${arch}, will install tfsec at ${TFSEC_PATH}"
     test ! -d "${TFSEC_PATH}" && install -d "${TFSEC_PATH}"
 
