@@ -3,7 +3,7 @@
 cd "${GITHUB_WORKSPACE}/${INPUT_WORKING_DIRECTORY}" || exit
 
 echo '::group::🐶 Installing reviewdog ... https://github.com/reviewdog/reviewdog'
-REVIEWDOG_PATH="$HOME\.bin\reviewdog"
+REVIEWDOG_PATH="$HOME/.bin/reviewdog"
 mkdir -p "$REVIEWDOG_PATH"
 
 curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b "${REVIEWDOG_PATH}" "${REVIEWDOG_VERSION}" 2>&1
