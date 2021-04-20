@@ -21,26 +21,26 @@ echo '::group:: Installing tfsec ... https://github.com/tfsec/tfsec'
         MSYS_NT*)   os=windows;;
         *)          echo "Unknown system: ${unameOS}" && exit 1
     esac
-    
+
     unameArch="$(uname -m)"
     case "${unameArch}" in
         x86*)      arch=amd64;;
         *)         echo "Unsupported architecture: ${unameArch}. Only AMD64 is supported by tfsec" && exit 1
     esac
-    
-    echo "Detected ${os} running on ${arch}"
 
     TFSEC_PATH="$HOME/.bin/tfsec"
-    test ! -d "${TFSEC_PATH}" && install -d "${TFSEC_PATH}"
+    echo "Detected ${os} running on ${arch}, will install tfsec at ${TFSEC_PATH}"
+    test ! -d "${TFSEC_PATH}" && install --directory "${TFSEC_PATH}"
+
+    binary="tfsec"
     url="https://github.com/tfsec/tfsec/releases/latest/download/tfsec-$os-$arch"
     if [[ "$os" = "windows" ]]; then
         url+=".exe"
-        curl -sfL "$url" --output tfsec.exe
-        install tfsec.exe "$TFSEC_PATH"
-    else
-        curl -sfL "$url" --output tfsec
-        install tfsec "$TFSEC_PATH"
+        binary+=".exe"
     fi
+
+    curl --silent --show-error --location "$url" --output "$binary"
+    install tfsec "$TFSEC_PATH"
 
     echo "$TFSEC_PATH" >> "$GITHUB_PATH"
     export PATH="$TFSEC_PATH:$PATH"

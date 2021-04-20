@@ -50,7 +50,6 @@ outputs:
     description: 'reviewdog command return code'
     value: ${{ steps.tfsec.outputs.reviewdog-return-code }}
 
-
 runs:
   using: 'composite'
   steps:
